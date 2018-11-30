@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body></body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
+  <script id="fragShader" type="shader-code">
+    uniform vec2 resolution;
+    uniform float time;
+    uniform sampler2D texture;
+
+    void main() {
+      vec2 pos = gl_FragCoord.xy / resolution.xy;
+      vec4 tex = texture2D(texture, pos);
+
+      float r = abs(sin(time / 1200.)) * tex.r;
+      float g = pos.x * tex.g;
+      float b = pos.y * tex.b;
+      float a = 1.;
+
+      gl_FragColor = vec4(r, g, b, a);
+    }
+  </script>
+  <script src="index.js"></script>
+</html>
