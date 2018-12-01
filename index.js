@@ -44,12 +44,7 @@ cube.position.z = -1.25; // Shift the cube back so we can see it
 
 /** Start animating **/
 const render = () => {
-  // Update the render's size.
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  // Update our shader's uniforms.
-  uniforms.resolution.value.x = window.innerWidth;
-  uniforms.resolution.value.y = window.innerHeight;
+  // Update time uniform.
   uniforms.time.value = Date.now() - startTime;
 
   // Animate the scene.
@@ -59,3 +54,10 @@ const render = () => {
 };
 
 render();
+
+// Listen for resize event to update resolution uniforms.
+window.onresize = function(event){
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  uniforms.resolution.value.x = window.innerWidth;
+  uniforms.resolution.value.y = window.innerHeight;
+}
